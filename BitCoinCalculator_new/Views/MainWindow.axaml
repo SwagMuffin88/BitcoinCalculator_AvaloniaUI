@@ -1,0 +1,113 @@
+<!--<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:BitCoinCalculator_new.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:avalonia="http://reactiveui.net"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="BitCoinCalculator_new.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="BitCoinCalculator_new">
+
+    <Design.DataContext>
+        ~1~ This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) @1@
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>-->
+
+    <!-- <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/> -->
+    
+<reactiveUi:ReactiveWindow x:TypeArguments="viewModels:MainWindowViewModel"
+                           xmlns="https://github.com/avaloniaui"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                           xmlns:reactiveUi="clr-namespace:ReactiveUI.Avalonia;assembly=ReactiveUI.Avalonia"
+                           xmlns:viewModels="clr-namespace:BitCoinCalculator_new.ViewModels"
+                           mc:Ignorable="d"
+                           x:Class="BitCoinCalculator_new.Views.MainWindow"
+                           x:DataType="viewModels:MainWindowViewModel"
+                           Title="Login"
+                           Width="420"
+                           Height="500"
+                           CanResize="False"
+                           WindowStartupLocation="CenterScreen"
+                           Background="#121826"
+                           RequestedThemeVariant="Dark"
+                           >
+
+    <Border CornerRadius="20"
+            Padding="30"
+            Width="360"
+            Background="#1F2937CC"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            BoxShadow="0 0 40 0 #00000080">
+
+        <StackPanel Spacing="20">
+            <TextBlock Text="Welcome Back"
+                       FontSize="26"
+                       Foreground="White"
+                       FontWeight="SemiBold"
+                       HorizontalAlignment="Center" />
+
+            <TextBlock Text="Login to your account"
+                       FontSize="14"
+                       Foreground="#9CA3AF"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,10"/>
+
+            <StackPanel>
+                <TextBlock Text="Username" Foreground="#9CA3AF" FontSize="12" Margin="0,0,0,5"/>
+                <TextBox Text="{Binding Username, Mode=TwoWay}"
+                         Background="#2C3444"
+                         Foreground="White"
+                         CornerRadius="8"
+                         BorderBrush="Transparent"
+                         Padding="8"/>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="Password" Foreground="#9CA3AF" FontSize="12" Margin="0,10,0,5"/>
+                <TextBox Text="{Binding Password, Mode=TwoWay}"
+                         PasswordChar="●"
+                         Background="#2C3444"
+                         Foreground="White"
+                         CornerRadius="8"
+                         BorderBrush="Transparent"
+                         Padding="8"/>
+            </StackPanel>
+
+            <TextBlock Text="{Binding StatusMessage}" 
+                       Foreground="White" 
+                       HorizontalAlignment="Center" 
+                       Margin="0, -10, 0, 10" />
+
+            <Button Content="Login"
+                    Command="{Binding LoginCommand}"
+                    Background="#4F46E5"
+                    Foreground="White"
+                    FontWeight="SemiBold"
+                    CornerRadius="8"
+                    Padding="12"
+                    Width="100"
+                    HorizontalAlignment="Center">
+                <Button.Styles>
+                    <Style Selector="Button:pointerover">
+                        <Setter Property="Background" Value="#6366F1"/>
+                    </Style>
+                </Button.Styles>
+            </Button>
+            <TextBlock HorizontalAlignment="Center" Margin="0,10,0,0">
+                <Run Text="Don't have an account? " Foreground="#9CA3AF"/>
+                <Run Text="Register" Foreground="#4F46E5" TextDecorations="Underline" />
+            </TextBlock>
+
+
+        </StackPanel>
+    </Border>
+</reactiveUi:ReactiveWindow>
+
+
+<!--</Window>-->
