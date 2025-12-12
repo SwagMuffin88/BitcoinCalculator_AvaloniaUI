@@ -3,6 +3,6 @@ using ReactiveUI;
 
 namespace BitCoinCalculator_new.ViewModels;
 
-public abstract class ViewModelBase : ReactiveObject
+public abstract class ViewModelBase : ObservableObject
 {
 }

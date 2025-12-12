@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BitCoinCalculator_new")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8b554730a7d60cd6f663b9d0cf92ebf167bf03b5")]
 [assembly: System.Reflection.AssemblyProductAttribute("BitCoinCalculator_new")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BitCoinCalculator_new")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

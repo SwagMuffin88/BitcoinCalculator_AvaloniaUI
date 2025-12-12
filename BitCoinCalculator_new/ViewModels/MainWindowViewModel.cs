@@ -1,9 +1,6 @@
-﻿using ReactiveUI;
-using System;
-using System.ComponentModel;
-using System.Reactive;
-using System.Diagnostics;
-using Avalonia.Dialogs.Internal;
+﻿using System.Windows.Input;
+using BitCoinCalculator_new.Services;
+using CommunityToolkit.Mvvm.Input;
 
 namespace BitCoinCalculator_new.ViewModels;
 
@@ -14,64 +11,49 @@ namespace BitCoinCalculator_new.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase
 {
-    private string _username;
-    public string Username
+    private decimal _btcAmount;
+    private decimal _price;
+    private string _result;
+    
+    public decimal BtcAmount {
+        get => _btcAmount;
+        set => SetProperty(ref _btcAmount, value);
+    }
+    
+    public string Result
     {
-        get => _username;
-        set => this.RaiseAndSetIfChanged(ref _username, value);
+        get => _result;
+        set => SetProperty(ref _result, value);
     }
 
-    private string _password;
-    public string Password
+    public ICommand CalculateCommand
     {
-        get => _password;
-        set => this.RaiseAndSetIfChanged(ref _password, value);
+        get;
     }
 
     private string _statusMessage;
     public string StatusMessage
     {
         get => _statusMessage;
-        set => this.RaiseAndSetIfChanged(ref _statusMessage, value);
+        set => SetProperty(ref _statusMessage, value);
     }
     
-    public ReactiveCommand<Unit, Unit> LoginCommand { get; }
+    // public ReactiveCommand<Unit, Unit> LoginCommand { get; }
 
-    public MainWindowViewModel()
+    public MainWindowViewModel(IBitcoinPriceService priceService)
     {
-        const string DUMMY_USERNAME = "admin";
-        const string DUMMY_PASSWORD = "password123";
-
-        LoginCommand = ReactiveCommand.Create(() =>
+        CalculateCommand = new RelayCommand(async () =>
         {
-            StatusMessage = string.Empty;
-            
-            // Simple validation check
-            if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
-            {
-                StatusMessage = "Please enter both username and password.";
-                Debug.WriteLine("Login failed: Empty credentials.");
-                return;
-            }
-            
-            // Dummy login logic
-            if (Username.Equals(DUMMY_USERNAME, StringComparison.OrdinalIgnoreCase) && Password == DUMMY_PASSWORD)
-            {
-                StatusMessage = "Login successful!";
-                Debug.WriteLine($"Login successful for user: {Username}");
-                // You can add navigation or other logic here upon successful login
-            }
-            else
-            {
-                StatusMessage = "Invalid username or password.";
-                Debug.WriteLine("Login failed: Invalid credentials.");
-            }
+            _price = await priceService.GetCurrentPriceBTCToUSDAsync();
+            Result = $"{BtcAmount} BTC = {(BtcAmount * _price):0.00} USD";
+            // TODO create functionality to convert to multiple currencies, also curr. to BTC
         });
+        
         
     }
 
-    public BitcoinRates getRates()
+    /*public BitcoinRates getRates()
     {
         return null;
-    }
+    }*/
 }

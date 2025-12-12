@@ -1,4 +1,55 @@
-<!--<Window xmlns="https://github.com/avaloniaui"
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:BitCoinCalculator_new.ViewModels"
+        x:Class="BitCoinCalculator_new.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        x:CompileBindings="True"
+        Title="Bitcoin Calculator"
+        Width="500"
+        Height="500"
+        Background="WhiteSmoke"
+        >
+    
+    <Border CornerRadius="20"
+            Padding="30"
+            Width="450"
+            Background="#1F2937CC"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            BoxShadow="0 0 40 0 #00000080">
+        
+
+    <StackPanel Margin="40" Spacing="30">
+        <TextBlock Text="BTC Calculator" FontSize="30" FontWeight="SemiBold"/>
+
+        <TextBox Text="{Binding BtcAmount}" Watermark="Amount in BTC"/>
+
+        <Button Content="Calculate" Command="{Binding CalculateCommand}"
+                Background="#4F46E5"
+                Foreground="White"
+                FontWeight="SemiBold"
+                CornerRadius="8"
+                Padding="12"
+                Width="100"
+                HorizontalAlignment="Center">
+            <Button.Styles>
+                <Style Selector="Button:pointerover">
+                    <Setter Property="Background" Value="WhiteSmoke"/>
+                </Style>
+            </Button.Styles>
+        </Button>
+
+        <TextBlock Text="{Binding Result}" FontSize="20" TextAlignment="Center" 
+                   FontWeight="SemiBold" TextWrapping="WrapWithOverflow"/>
+    </StackPanel>
+    </Border>
+    
+</Window>
+
+
+
+<!--
+~1~<Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:BitCoinCalculator_new.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -11,12 +62,12 @@
         Title="BitCoinCalculator_new">
 
     <Design.DataContext>
-        ~1~ This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) @1@
+        ~2~ This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) @2@
         <vm:MainWindowViewModel/>
-    </Design.DataContext>-->
+    </Design.DataContext>@1@
 
-    <!-- <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/> -->
+    ~1~ <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/> @1@
     
 <reactiveUi:ReactiveWindow x:TypeArguments="viewModels:MainWindowViewModel"
                            xmlns="https://github.com/avaloniaui"
@@ -110,4 +161,5 @@
 </reactiveUi:ReactiveWindow>
 
 
-<!--</Window>-->
+~1~</Window>@1@
+-->

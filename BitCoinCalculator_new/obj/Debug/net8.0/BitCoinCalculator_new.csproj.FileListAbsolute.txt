@@ -83,3 +83,5 @@
 /home/katri/RiderProjects/BitCoinCalculator_new/BitCoinCalculator_new/obj/Debug/net8.0/BitCoinCalculator_new.pdb
 /home/katri/RiderProjects/BitCoinCalculator_new/BitCoinCalculator_new/obj/Debug/net8.0/BitCoinCalculator_new.genruntimeconfig.cache
 /home/katri/RiderProjects/BitCoinCalculator_new/BitCoinCalculator_new/obj/Debug/net8.0/ref/BitCoinCalculator_new.dll
+/home/katri/RiderProjects/BitCoinCalculator_new/BitCoinCalculator_new/bin/Debug/net8.0/Newtonsoft.Json.dll
+/home/katri/RiderProjects/BitCoinCalculator_new/BitCoinCalculator_new/obj/Debug/net8.0/BitCoinCalculator_new.sourcelink.json
