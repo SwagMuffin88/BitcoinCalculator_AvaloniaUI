@@ -9,26 +9,23 @@ public class CoinDeskPriceService : IBitcoinPriceService
 {
     private readonly HttpClient _http = new();
 
-    public async Task<decimal> GetCurrentPriceBTCToUSDAsync()   // TODO expand to other currencies
+    public async Task<decimal> GetCurrentBtcPriceAsync(string currencyToken)
     {
         var json = await _http.GetStringAsync(
-            "https://data-api.coindesk.com/index/cc/v1/latest/tick?market=cadli&instruments=BTC-USD,BTC-EUR&apply_mapping=true&api_key=287a1a4f8df941e85d346e1e04eb8d12603ba3459786036bb26714c835d95326");
+            "https://data-api.coindesk.com/index/cc/v1/latest/tick?market=cadli&instruments=BTC-USD,BTC-EUR,BTC-GBP&apply_mapping=true&api_key=287a1a4f8df941e85d346e1e04eb8d12603ba3459786036bb26714c835d95326");
 
         using var doc = JsonDocument.Parse(json);
         
         if (!doc.RootElement.TryGetProperty("Data", out var data))
             throw new Exception("API response missing 'Data'");
+        
+        if (!data.TryGetProperty($"{ currencyToken }", out var token))
+            throw new Exception($"{currencyToken} price not found");
+        
 
-        if (!data.TryGetProperty("BTC-USD", out var btcUsd))
-            throw new Exception("BTC-USD price not found");
+        data = doc.RootElement.GetProperty("Data");
+        var currencyJson = data.GetProperty(currencyToken);
 
-        if (!btcUsd.TryGetProperty("VALUE", out var priceToken))
-            throw new Exception("VALUE not found in BTC-USD object");
-
-        return doc.RootElement
-            .GetProperty("Data")
-            .GetProperty("BTC-USD")
-            .GetProperty("VALUE")
-            .GetDecimal();
+        return currencyJson.GetProperty("VALUE").GetDecimal();
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 using BitCoinCalculator_new.Services;
 using CommunityToolkit.Mvvm.Input;
 
@@ -12,10 +14,12 @@ namespace BitCoinCalculator_new.ViewModels;
 public class MainWindowViewModel : ViewModelBase
 {
     private decimal _btcAmount;
-    private decimal _price;
+    // private decimal _price;
     private string _result;
+    private string? _currencyToken;
     
-    public decimal BtcAmount {
+    public decimal BtcAmount 
+    {
         get => _btcAmount;
         set => SetProperty(ref _btcAmount, value);
     }
@@ -26,34 +30,43 @@ public class MainWindowViewModel : ViewModelBase
         set => SetProperty(ref _result, value);
     }
 
+    public string? CurrencyToken
+    {
+        get => _currencyToken;
+        set => SetProperty(ref _currencyToken, value);
+    }
+
     public ICommand CalculateCommand
     {
         get;
     }
 
-    private string _statusMessage;
-    public string StatusMessage
-    {
-        get => _statusMessage;
-        set => SetProperty(ref _statusMessage, value);
-    }
+    public ObservableCollection<string> TargetCurrencies { get; } =
+    [
+        "USD",
+        "EUR",
+        "GBP"
+    ];
     
-    // public ReactiveCommand<Unit, Unit> LoginCommand { get; }
-
     public MainWindowViewModel(IBitcoinPriceService priceService)
     {
         CalculateCommand = new RelayCommand(async () =>
-        {
-            _price = await priceService.GetCurrentPriceBTCToUSDAsync();
-            Result = $"{BtcAmount} BTC = {(BtcAmount * _price):0.00} USD";
-            // TODO create functionality to convert to multiple currencies, also curr. to BTC
-        });
-        
-        
+        { // TODO add result for missing currency token instead of exception
+            // TODO add functionality to convert BTC to EEK
+            try
+            {
+                var price = await priceService
+                    .GetCurrentBtcPriceAsync("BTC-" + CurrencyToken);
+                Result = 
+                    $"{BtcAmount} BTC = {(BtcAmount * price):0.00} {CurrencyToken}";
+            }
+            catch (Exception e)
+            {
+                Result = "Invalid input";
+                Console.WriteLine(e);
+                throw;
+            } 
+        }); 
     }
-
-    /*public BitcoinRates getRates()
-    {
-        return null;
-    }*/
+    
 }

@@ -19,9 +19,16 @@
             BoxShadow="0 0 40 0 #00000080">
         
 
-    <StackPanel Margin="40" Spacing="30">
-        <TextBlock Text="BTC Calculator" FontSize="30" FontWeight="SemiBold"/>
+    <StackPanel Margin="40" Spacing="15">
+        <TextBlock Text="BTC Calculator" FontSize="30" LineSpacing="10" FontWeight="SemiBold"/>
+        
+        <TextBlock Text="Please choose a target currency:" FontSize="12"/>
+        <ComboBox 
+                  Width="200"
+                  ItemsSource="{Binding TargetCurrencies}"
+                  SelectedItem="{Binding CurrencyToken}" />
 
+        <TextBlock Text="Please enter your BTC amount:" FontSize="12"/>
         <TextBox Text="{Binding BtcAmount}" Watermark="Amount in BTC"/>
 
         <Button Content="Calculate" Command="{Binding CalculateCommand}"
@@ -31,7 +38,8 @@
                 CornerRadius="8"
                 Padding="12"
                 Width="100"
-                HorizontalAlignment="Center">
+                HorizontalAlignment="Center"
+                Margin="20">
             <Button.Styles>
                 <Style Selector="Button:pointerover">
                     <Setter Property="Background" Value="WhiteSmoke"/>
@@ -39,7 +47,7 @@
             </Button.Styles>
         </Button>
 
-        <TextBlock Text="{Binding Result}" FontSize="20" TextAlignment="Center" 
+        <TextBlock LineSpacing="10 " Text="{Binding Result}" FontSize="20" TextAlignment="Center" 
                    FontWeight="SemiBold" TextWrapping="WrapWithOverflow"/>
     </StackPanel>
     </Border>

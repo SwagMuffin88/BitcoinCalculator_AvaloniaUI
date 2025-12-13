@@ -1,6 +1,8 @@
 using System.Threading.Tasks;
 
+namespace BitCoinCalculator_new.Services;
+
 public interface IBitcoinPriceService
 {
-    Task<decimal> GetCurrentPriceBTCToUSDAsync();
+    Task<decimal> GetCurrentBtcPriceAsync(string currencyToken);
 }
