@@ -45,14 +45,14 @@ public class MainWindowViewModel : ViewModelBase
     [
         "USD",
         "EUR",
-        "GBP"
+        "GBP",
+        "EEK"
     ];
     
     public MainWindowViewModel(IBitcoinPriceService priceService)
     {
         CalculateCommand = new RelayCommand(async () =>
         { // TODO add result for missing currency token instead of exception
-            // TODO add functionality to convert BTC to EEK
             try
             {
                 var price = await priceService
