@@ -13,10 +13,11 @@ namespace BitCoinCalculator_new.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase
 {
-    private decimal _btcAmount;
-    // private decimal _price;
-    private string _result;
+    private static string[] _currencies = ["USD", "EUR", "GBP", "EEK"];
     private string? _currencyToken;
+        // = Currencies[0];
+    private decimal _btcAmount;
+    private string _result;
     
     public decimal BtcAmount 
     {
@@ -41,20 +42,20 @@ public class MainWindowViewModel : ViewModelBase
         get;
     }
 
-    public ObservableCollection<string> TargetCurrencies { get; } =
-    [
-        "USD",
-        "EUR",
-        "GBP",
-        "EEK"
-    ];
+    public ObservableCollection<string> TargetCurrencies  => 
+        new ObservableCollection<string>(_currencies);
     
     public MainWindowViewModel(IBitcoinPriceService priceService)
     {
         CalculateCommand = new RelayCommand(async () =>
-        { // TODO add result for missing currency token instead of exception
+        {
             try
             {
+                if (string.IsNullOrEmpty(CurrencyToken)) {
+                    Result = "Please select a currency";
+                    return;
+                }
+                
                 var price = await priceService
                     .GetCurrentBtcPriceAsync("BTC-" + CurrencyToken);
                 Result = 
@@ -62,9 +63,7 @@ public class MainWindowViewModel : ViewModelBase
             }
             catch (Exception e)
             {
-                Result = "Invalid input";
                 Console.WriteLine(e);
-                throw;
             } 
         }); 
     }
