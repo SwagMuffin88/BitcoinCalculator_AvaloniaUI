@@ -8,15 +8,19 @@
         Width="500"
         Height="500"
         Background="WhiteSmoke"
-        >
+>
+    <Grid>
+    <Image Source="avares://BitCoinCalculator_new/Assets/silly.jpg"
+           Stretch="UniformToFill" />
     
     <Border CornerRadius="20"
             Padding="30"
             Width="450"
-            Background="#1F2937CC"
+            Background="AntiqueWhite"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            BoxShadow="0 0 40 0 #00000080">
+            BoxShadow="0 0 40 0 #00000080"
+            Opacity="90">
         
 
     <StackPanel Margin="40" Spacing="15">
@@ -51,7 +55,7 @@
                    FontWeight="SemiBold" TextWrapping="WrapWithOverflow"/>
     </StackPanel>
     </Border>
-    
+    </Grid>
 </Window>
 
 
